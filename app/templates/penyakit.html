@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block title %}Penyakit{% endblock %}
+{% block content %}
+	<div class="row">
+		<div class="col">
+			{% if pesan %}
+				<div class="alert {% if status %} alert-success {% else %} alert-danger {% endif %} alert-dismissible fade show" role="alert">
+				  {{ pesan }}
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				    <span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<a href="{{ url_for('create_penyakit_page') }}" class="btn btn-primary">Tambah Penyakit</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th scope="col">No</th>
+							<th scope="col">Penyakit</th>
+							<th scope="col">Aksi</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in penyakit %}
+							<tr>
+								<th scope="row">{{ loop.index }}</th>
+								<td>{{ item.penyakit }}</td>
+								<td>
+									<div class="btn-group" role="group" aria-label="Basic example">
+										<a href="{{ url_for('show_penyakit_with_gejala', id=item.id) }}" class="btn btn-success">Gejala</a>
+										<a href="{{ url_for('show_penyakit', id=item.id) }}" class="btn btn-warning">Edit</a>
+										<a href="{{ url_for('delete_penyakit', id=item.id) }}" class="btn btn-danger">Delete</a>
+									</div>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}

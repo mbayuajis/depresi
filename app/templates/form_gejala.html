@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block title %}Tambah Gejala{% endblock %}
+{% block content %}
+	<form action="{{ url_for('create_gejala', id=penyakit.id) }}" method="POST">
+		<input type="hidden" name="penyakit_id" value="{{ penyakit.id }}">
+		<div class="form-group">
+			<label for="penyakit">Nama Penyakit</label>
+			<input type="text" class="form-control" name="penyakit" id="penyakit" value="{{ penyakit.penyakit }}">
+		</div>
+		<div class="form-group">
+			<div class="custom-control custom-switch">
+				<input type="checkbox" class="custom-control-input" id="checkgejala" onclick="check()" name="checkgejala">
+				<label class="custom-control-label" for="checkgejala">Gejala Sudah Pernah Diinputkan</label>
+			</div>
+		</div>
+		<div class="form-group" id="formgejala" style="display: none;">
+			<label for="gejala">Gejala</label>
+			<select name="gejala" id="gejala" class="form-control">
+				<option selected>Pilih Gejala</option>
+				{% for item in gejala %}
+					<option value="{{ item.id }}">{{ item.gejala }}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div class="form-group" id="formbgejala" style="display: none;">
+			<label for="bgejala">Gejala</label>
+			<input type="text" name="bgejala" id="bgejala" class="form-control">
+		</div>
+		<input type="submit" class="btn btn-primary" value="Submit">
+	</form>
+
+	<script>
+		function check() {
+			let check = document.getElementById('checkgejala')
+			let formgejala = document.getElementById('formgejala')
+			let formbgejala = document.getElementById('formbgejala')
+
+			if (check.checked == true) {
+				formgejala.style.display = "block"
+				formbgejala.style.display = "none"
+			} else {
+				formgejala.style.display = "none"
+				formbgejala.style.display = "block"
+			}
+		}
+	</script>
+{% endblock %}

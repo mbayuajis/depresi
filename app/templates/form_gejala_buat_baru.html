@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}Tambah Baru Gejala{% endblock %}
+{% block content %}
+	<form action="{{ url_for('gejala') }}" method="POST">
+		{% if gejala %}
+			<input type="hidden" name="id" value="{{ gejala.id }}">
+		{% endif %}
+		<div class="form-group">
+			<label for="gejala">Gejala</label>
+			<input type="text" class="form-control" name="gejala" id="gejala" {% if gejala %}
+				value="{{ gejala.gejala }}" 
+			{% endif %}>
+		</div>
+		<input type="submit" class="btn btn-primary" value="submit">
+	</form>
+{% endblock %}

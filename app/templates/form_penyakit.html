@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}Form Penyakit{% endblock %}
+{% block content %}
+	<form method="POST" action="{{ url_for('penyakit') }}">
+		{% if penyakit %}
+			<input type="hidden" name="id" value="{{ penyakit.id }}">
+		{% endif %}
+		<div class="form-group">
+			<label for="penyakit">Nama Penyakit</label>
+			<input type="Text" class="form-control" name="penyakit" id="penyakit" aria-describedby="penyakitHelp" {% if penyakit %} value="{{ penyakit.penyakit }}" {% endif %}>
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+{% endblock %}
